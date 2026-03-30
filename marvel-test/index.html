@@ -3,745 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>House of the Dragon — HBO Original</title>
+  <title>Marvel Movies - Premium Streaming Experience</title>
+  <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      background: #000;
-      font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
-      color: #fff;
-      overflow-x: hidden;
-    }
-
-    /* ─── Hero ─────────────────────────────────────────── */
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      min-height: 640px;
-      overflow: hidden;
-    }
-
-    /* Two stacked bg layers for cross-fade */
-    .hero-bg-layer {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: opacity;
-    }
-
-    .hero-bg-layer.layer-a {
-      background-image: url('https://api.builder.io/api/v1/image/assets/TEMP/4058f056dd711db9e05d3f42f15802b3e5fb2689?width=2880');
-      opacity: 1;
-    }
-
-    .hero-bg-layer.layer-b {
-      opacity: 0;
-    }
-
-    .hero-gradient {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.90) 100%);
-      z-index: 1;
-    }
-
-    /* ─── Network Logo ─────────────────────────────────── */
-    .network-logo {
-      position: absolute;
-      top: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      z-index: 10;
-    }
-
-    .hbo-wordmark {
-      font-size: 26px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: #fff;
-    }
-
-    .hbo-circle {
-      display: inline-block;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: #fff;
-      color: #000;
-      font-size: 13px;
-      font-weight: 900;
-      text-align: center;
-      line-height: 28px;
-      letter-spacing: 0;
-      margin: 0 1px;
-    }
-
-    .original-label {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 4px;
-      color: #fff;
-      text-transform: uppercase;
-    }
-
-    /* ─── Glass Info Card ──────────────────────────────── */
-    .info-card {
-      position: absolute;
-      left: 32px;
-      top: 50%;
-      transform: translateY(-42%);
-      width: 540px;
-      border-radius: 20px;
-      overflow: hidden;
-      z-index: 10;
-
-      /* High-quality glass: blur + saturation boost */
-      backdrop-filter: blur(24px) saturate(180%) brightness(0.85);
-      -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(0.85);
-
-      /* Layered shadow: soft ambient + stronger depth */
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.18),
-        inset 0 -1px 0 rgba(0,0,0,0.20),
-        0 8px 32px rgba(0,0,0,0.50),
-        0 32px 80px rgba(0,0,0,0.55);
-
-      /* Slightly tinted dark glass tint */
-      background: rgba(8, 6, 18, 0.42);
-
-      /* Border as a single rule shorthand */
-      border: 1px solid rgba(255,254,255,0.16);
-    }
-
-    /* Top edge glass highlight */
-    .info-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.30) 40%, rgba(255,255,255,0.30) 60%, transparent 100%);
-      z-index: 2;
-    }
-
-    /* Subtle noise grain for glass realism */
-    .info-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 20px;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      opacity: 0.07;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .card-bg-art {
-      position: absolute;
-      inset: 0;
-      background: url('https://api.builder.io/api/v1/image/assets/TEMP/06c8066f903d012002bb4f076d378eb5d5ac22ab?width=1200') center / cover no-repeat;
-      opacity: 0.12;
-      filter: blur(6px) saturate(60%);
-      transform: scale(1.05); /* prevent blur edge bleed */
-    }
-
-    .card-inner {
-      position: relative;
-      z-index: 2;
-      padding: 40px 44px 44px;
-    }
-
-    .show-title {
-      font-size: 40px;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.1;
-      margin-bottom: 28px;
-      text-shadow: 0 2px 16px rgba(0,0,0,0.6);
-      transition: opacity 0.4s ease;
-    }
-
-    .description-label {
-      font-size: 16px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 8px;
-    }
-
-    .description-text {
-      font-size: 14px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.72);
-      line-height: 1.65;
-      margin-bottom: 36px;
-      max-width: 390px;
-      transition: opacity 0.4s ease;
-    }
-
-    .card-meta-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 36px;
-    }
-
-    .meta-badge {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      color: rgba(255,255,255,0.7);
-      background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.16);
-      border-radius: 5px;
-      padding: 4px 10px;
-      transition: background 0.2s ease, border-color 0.2s ease;
-    }
-
-    .meta-badge.rating-badge {
-      color: #e8c86e;
-      border-color: rgba(232,200,110,0.35);
-      background: rgba(232,200,110,0.10);
-    }
-
-    .card-actions {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .btn-play {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #fffefe;
-      color: #000;
-      border: none;
-      border-radius: 20px;
-      padding: 14px 32px;
-      font-family: inherit;
-      font-size: 22px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .btn-play:hover {
-      background: #e8e8e8;
-      transform: scale(1.04);
-      box-shadow: 0 6px 24px rgba(255,255,255,0.25);
-    }
-
-    .btn-play svg {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-    }
-
-    .btn-watchlist {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255,255,255,0.10);
-      color: #fff;
-      border: 1.5px solid rgba(255,255,255,0.55);
-      border-radius: 20px;
-      padding: 12px 28px;
-      font-family: inherit;
-      font-size: 20px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
-      white-space: nowrap;
-      backdrop-filter: blur(4px);
-    }
-
-    .btn-watchlist:hover {
-      background: rgba(255,255,255,0.20);
-      border-color: rgba(255,255,255,0.90);
-      transform: scale(1.04);
-    }
-
-    .btn-watchlist svg {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-    }
-
-    /* ─── Recommendation Strip ─────────────────────────── */
-    .recommendation-strip {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0,0,0,0.50);
-      backdrop-filter: blur(12px) saturate(150%);
-      -webkit-backdrop-filter: blur(12px) saturate(150%);
-      border-top: 1px solid rgba(255,255,255,0.07);
-      padding: 20px 32px 26px;
-      z-index: 10;
-    }
-
-    .strip-heading {
-      font-size: 22px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 14px;
-    }
-
-    .movies-scroll-track {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      scroll-behavior: smooth;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255,255,255,0.18) transparent;
-    }
-
-    .movies-scroll-track::-webkit-scrollbar { height: 3px; }
-    .movies-scroll-track::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.18);
-      border-radius: 2px;
-    }
-
-    /* ─── Movie Thumbnail Cards ────────────────────────── */
-    .movie-thumb {
-      flex-shrink: 0;
-      width: 190px;
-      height: 116px;
-      border-radius: 12px;
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-      border: 2px solid transparent;
-      transition:
-        transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-        box-shadow 0.35s ease,
-        border-color 0.25s ease;
-      will-change: transform;
-    }
-
-    /* Per-card accent color via CSS custom property */
-    .movie-thumb:hover,
-    .movie-thumb.is-active {
-      transform: translateY(-8px) scale(1.06);
-      border-color: var(--card-accent, rgba(255,255,255,0.6));
-      box-shadow:
-        0 16px 40px rgba(0,0,0,0.75),
-        0 0 0 1px var(--card-accent, rgba(255,255,255,0.4)),
-        0 0 28px -4px var(--card-glow, rgba(255,255,255,0.25));
-    }
-
-    .movie-thumb.is-active {
-      border-color: var(--card-accent, rgba(255,255,255,0.9));
-    }
-
-    /* Poster image / placeholder */
-    .thumb-poster {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-
-    .movie-thumb:hover .thumb-poster {
-      transform: scale(1.08);
-    }
-
-    .thumb-placeholder {
-      width: 100%;
-      height: 100%;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-
-    .movie-thumb:hover .thumb-placeholder {
-      transform: scale(1.08);
-    }
-
-    /* Dark scrim that deepens on hover */
-    .thumb-scrim {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.10) 60%);
-      transition: opacity 0.3s ease;
-    }
-
-    .movie-thumb:hover .thumb-scrim,
-    .movie-thumb.is-active .thumb-scrim {
-      opacity: 0.55;
-    }
-
-    /* Slide-up info panel */
-    .thumb-info {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 28px 10px 9px;
-      transform: translateY(0);
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .thumb-show-title {
-      font-size: 11px;
-      font-weight: 700;
-      color: #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      line-height: 1.3;
-      transition: opacity 0.25s ease;
-    }
-
-    .thumb-genre {
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.6px;
-      color: var(--card-accent, rgba(255,255,255,0.6));
-      text-transform: uppercase;
-      margin-top: 2px;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.3s ease 0.05s, transform 0.3s ease 0.05s;
-    }
-
-    .movie-thumb:hover .thumb-genre,
-    .movie-thumb.is-active .thumb-genre {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Centered play button */
-    .thumb-play-btn {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-    }
-
-    .thumb-play-circle {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.92);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transform: scale(0.7);
-      transition: opacity 0.25s ease, transform 0.30s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
-    }
-
-    .movie-thumb:hover .thumb-play-circle {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .thumb-play-circle svg {
-      width: 13px;
-      height: 13px;
-      margin-left: 2px;
-    }
-
-    /* ─── Animations ───────────────────────────────────── */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .info-card { animation: fadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) both; }
-    .network-logo { animation: fadeInUp 0.5s 0.1s cubic-bezier(0.4, 0, 0.2, 1) both; }
-
-    /* ─── Card content transition on active show change ── */
-    .card-inner.is-transitioning .show-title,
-    .card-inner.is-transitioning .description-text {
-      opacity: 0;
-    }
-
-    /* ─── Hero Cards (from movie-hero-card.html) ─────── */
-    .hero-card {
-      position: relative;
-      width: 320px;
-      height: 460px;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06);
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      flex-shrink: 0;
-    }
-
-    .hero-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 45px 100px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 200, 100, 0.2);
-    }
-
-    .hero-card.is-active {
-      transform: translateY(-12px) scale(1.02);
-      border: 2px solid #e8c86e;
-      box-shadow: 0 50px 120px rgba(0, 0, 0, 0.95), 0 0 0 1px #e8c86e, 0 0 30px rgba(232, 200, 110, 0.3);
-    }
-
-    .hero-card:hover .card-overlay {
-      background: linear-gradient(
-        to top,
-        rgba(5, 0, 0, 0.98) 0%,
-        rgba(5, 0, 0, 0.7) 45%,
-        rgba(0, 0, 0, 0.1) 100%
-      );
-    }
-
-    .card-poster {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-    }
-
-    .card-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(5, 0, 0, 0.95) 0%,
-        rgba(5, 0, 0, 0.5) 40%,
-        rgba(0, 0, 0, 0.05) 100%
-      );
-      transition: background 0.3s ease;
-    }
-
-    .network-badge {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 6px;
-      padding: 4px 10px;
-      font-family: Arial, sans-serif;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      color: #ffffff;
-      text-transform: uppercase;
-    }
-
-    .network-badge span {
-      color: #c9a227;
-    }
-
-    .card-content {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 20px 20px 22px;
-    }
-
-    .franchise-label {
-      font-family: Arial, sans-serif;
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 3px;
-      color: rgba(255, 255, 255, 0.55);
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .movie-title {
-      font-size: 28px;
-      font-weight: 700;
-      color: #ffffff;
-      line-height: 1.05;
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
-      letter-spacing: 0.5px;
-      margin-bottom: 14px;
-    }
-
-    .movie-title .title-highlight {
-      color: #e8c86e;
-    }
-
-    .card-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .meta-tag {
-      font-family: Arial, sans-serif;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      color: rgba(255, 255, 255, 0.7);
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 4px;
-      padding: 3px 8px;
-    }
-
-    .meta-tag.rating {
-      color: #e8c86e;
-      border-color: rgba(232, 200, 110, 0.3);
-      background: rgba(232, 200, 110, 0.08);
-    }
-
-    .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .stream-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .stream-label {
-      font-family: Arial, sans-serif;
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: rgba(255, 255, 255, 0.45);
-      text-transform: uppercase;
-    }
-
-    .stream-date {
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: 0.3px;
-    }
-
-    .watch-btn {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      background: #c9a227;
-      color: #000000;
-      border: none;
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-family: Arial, sans-serif;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      transition: background 0.2s ease, transform 0.15s ease;
-    }
-
-    .watch-btn:hover {
-      background: #e8c86e;
-      transform: scale(1.04);
-    }
-
-    .play-icon {
-      width: 0;
-      height: 0;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 8px solid #000;
-      flex-shrink: 0;
-    }
-
-    /* ─── Responsive ───────────────────────────────────── */
-    @media (max-width: 900px) {
-      .info-card {
-        width: calc(100% - 32px);
-        left: 16px;
-        top: auto;
-        bottom: 230px;
-        transform: none;
-      }
-
-      .card-inner { padding: 28px 24px 32px; }
-
-      .show-title { font-size: 28px; }
-
-      .btn-play { font-size: 16px; padding: 12px 24px; }
-      .btn-watchlist { font-size: 15px; padding: 10px 20px; }
-
-      .recommendation-strip { padding: 14px 16px 18px; }
-      .strip-heading { font-size: 17px; }
-
-      .movie-thumb { width: 150px; height: 92px; }
-    }
-
-    @media (max-width: 600px) {
-      .info-card { bottom: 210px; }
-
-      .show-title { font-size: 22px; margin-bottom: 16px; }
-      .description-text { font-size: 13px; margin-bottom: 24px; }
-
-      .card-actions { flex-direction: column; align-items: stretch; gap: 12px; }
-      .btn-play, .btn-watchlist { justify-content: center; }
-
-      .movie-thumb { width: 126px; height: 78px; }
-    }
-
-    @media (max-width: 480px) {
-      .hero-card {
-        width: 280px;
-        height: 400px;
-      }
-
-      .movie-title {
-        font-size: 22px;
-      }
-    }
-  </style>
 </head>
 <body>
 
   <section class="hero">
-    <!-- Hero Background -->
-    <div id="hero-bg" style="position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; transition: background-image 0.6s ease-in-out; z-index: 0;"></div>
-
-    <!-- Cross-fade background layers -->
-    <div class="hero-bg-layer layer-a" id="bg-layer-a"></div>
-    <div class="hero-bg-layer layer-b" id="bg-layer-b"></div>
+    <!-- Hero Background with Dynamic Updates -->
+    <div id="hero-bg"></div>
     <div class="hero-gradient"></div>
 
-    <!-- HBO Original logo -->
-    <div class="network-logo">
-      <span class="hbo-wordmark">HB<span class="hbo-circle">O</span></span>
-      <span class="original-label">Original</span>
-    </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-left">
+        <div class="nav-logo">MARVEL</div>
+        <div class="nav-menu">
+          <a href="#" class="nav-item dropdown">Home</a>
+          <a href="#" class="nav-item">Movie</a>
+          <a href="#" class="nav-item">TV</a>
+        </div>
+      </div>
+    </nav>
 
-    <!-- Glass info card -->
+    <!-- Liquid Glass Info Card -->
     <div class="info-card">
-      <div class="card-bg-art"></div>
       <div class="card-inner" id="card-inner">
         <h1 class="show-title" id="card-title">House Of The Dragon</h1>
 
@@ -778,11 +66,11 @@
       </div>
     </div>
 
-    <!-- Recommendation strip -->
+    <!-- Recommendation Strip -->
     <div class="recommendation-strip">
-      <h2 class="strip-heading">Trending Movies</h2>
+      <h2 class="strip-heading">Because you watched Game of Thrones</h2>
       <div class="movies-scroll-track" role="list" id="scroll-track">
-        <!-- Movies will be loaded here from TMDb API -->
+        <!-- Movies will be dynamically loaded here -->
       </div>
     </div>
   </section>
@@ -795,98 +83,50 @@
     const BACKDROP_BASE_URL = 'https://image.tmdb.org/t/p/original';
 
     // ── DOM Elements ───────────────────────────────────────
-    const layerA = document.getElementById('bg-layer-a');
-    const layerB = document.getElementById('bg-layer-b');
     const heroBg = document.getElementById('hero-bg');
     const cardTitle = document.getElementById('card-title');
-    const cardDesc  = document.getElementById('card-desc');
-    const cardMeta  = document.getElementById('card-meta');
+    const cardDesc = document.getElementById('card-desc');
+    const cardMeta = document.getElementById('card-meta');
     const cardInner = document.getElementById('card-inner');
     const scrollTrack = document.getElementById('scroll-track');
 
-    // Set initial background on layer A
-    layerA.style.backgroundImage = "url('https://api.builder.io/api/v1/image/assets/TEMP/4058f056dd711db9e05d3f42f15802b3e5fb2689?width=2880')";
-
-    let activeLayer = 'a'; // which layer is currently visible
-    let transitionTimer = null;
-
-    function crossFadeTo(bgValue) {
-      const incoming = activeLayer === 'a' ? layerB : layerA;
-      const outgoing = activeLayer === 'a' ? layerA : layerB;
-
-      // If bg is a url() string, set background-image; if gradient, set background
-      if (bgValue.startsWith('url(')) {
-        incoming.style.backgroundImage = bgValue;
-        incoming.style.background = '';
-      } else {
-        incoming.style.background = bgValue;
-        incoming.style.backgroundImage = '';
+    // ── Movie Data Object ───────────────────────────────────
+    const movieData = {
+      'house-of-dragon': {
+        title: 'House Of The Dragon',
+        description: 'Set nearly 200 years before the events of Game of Thrones, this prequel chronicles the violent succession war within House Targaryen — a conflict that shook the Iron Throne to its foundations.',
+        rating: '★ 8.5',
+        genres: ['Fantasy', 'Drama', 'TV-MA', '2 Seasons'],
+        backdrop: 'https://api.builder.io/api/v1/image/assets/TEMP/4058f056dd711db9e05d3f42f15802b3e5fb2689?width=2880',
+        poster: 'https://api.builder.io/api/v1/image/assets/TEMP/d6b708b003ea4735975aa75b2ff87f4b2babd9ee?width=700'
+      },
+      'the-pendragon-cycle': {
+        title: 'The Pendragon Cycle',
+        description: 'A mystical journey through Arthurian legend, following the rise and fall of kings, the quest for the Holy Grail, and the eternal struggle between fate and free will.',
+        rating: '★ 9.1',
+        genres: ['Fantasy', 'Epic', 'TV-MA', '1 Season'],
+        backdrop: 'https://api.builder.io/api/v1/image/assets/TEMP/06c8066f903d012002bb4f076d378eb5d5ac22ab?width=2880',
+        poster: 'https://api.builder.io/api/v1/image/assets/TEMP/4058f056dd711db9e05d3f42f15802b3e5fb2689?width=700'
       }
+    };
 
-      // Trigger reflow then fade
-      incoming.getBoundingClientRect();
-      incoming.style.opacity = '1';
-      outgoing.style.opacity = '0';
-      activeLayer = activeLayer === 'a' ? 'b' : 'a';
-    }
-
-    function updateCard(title, desc, metaArr) {
-      cardInner.classList.add('is-transitioning');
-      setTimeout(() => {
-        cardTitle.textContent = title;
-        cardDesc.textContent  = desc;
-
-        // Rebuild meta badges
-        cardMeta.innerHTML = `<span class="meta-badge rating-badge">${metaArr[0]}</span>`;
-        for (let i = 1; i < metaArr.length; i++) {
-          cardMeta.innerHTML += `<span class="meta-badge">${metaArr[i]}</span>`;
-        }
-
-        cardInner.classList.remove('is-transitioning');
-      }, 220);
-    }
-
-    // ── Generate Hero Card from TMDb Movie Data ───────────────
-    function createHeroCard(movie) {
-      const posterUrl = movie.poster_path ? IMAGE_BASE_URL + movie.poster_path : '';
-      const backdropUrl = movie.backdrop_path ? BACKDROP_BASE_URL + movie.backdrop_path : '';
+    // ── Generate Hero Card from Movie Data ───────────────────────
+    function createHeroCard(movieKey, movie) {
+      const posterUrl = movie.poster || '';
+      const backdropUrl = movie.backdrop || '';
       const title = movie.title || 'Unknown Title';
-      const rating = movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A';
-      const releaseDate = movie.release_date ? new Date(movie.release_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'Coming Soon';
+      const rating = movie.rating || 'N/A';
+      const genres = movie.genres ? movie.genres.slice(0, 2).join(' · ') : 'Drama';
       
-      // Get genre names from genre_ids (limited mapping for common genres)
-      const genreMap = {
-        28: 'Action',
-        12: 'Adventure',
-        16: 'Animation',
-        35: 'Comedy',
-        80: 'Crime',
-        99: 'Documentary',
-        18: 'Drama',
-        10751: 'Family',
-        14: 'Fantasy',
-        36: 'History',
-        27: 'Horror',
-        10402: 'Music',
-        9648: 'Mystery',
-        10749: 'Romance',
-        878: 'Science Fiction',
-        10770: 'TV Movie',
-        53: 'Thriller',
-        10752: 'War',
-        37: 'Western'
-      };
-      
-      const genres = movie.genre_ids ? movie.genre_ids.slice(0, 2).map(id => genreMap[id] || 'Genre').join(' · ') : 'Drama';
-      
-      // Create hero card HTML using the exact structure from movie-hero-card.html
+      // Create hero card HTML using EXACT structure from movie-hero-card.html
       const cardHTML = `
         <article class="hero-card" 
+                 data-movie-key="${movieKey}"
                  data-backdrop="${backdropUrl}"
                  data-title="${title}"
-                 data-desc="${movie.overview || 'No description available.'}"
-                 data-meta='["★ ${rating}","${genres}","${releaseDate}"]'
-                 data-rating="★ ${rating}">
+                 data-desc="${movie.description || 'No description available.'}"
+                 data-rating="${rating}"
+                 data-genres='${JSON.stringify(movie.genres || [])}'>
           <img class="card-poster" src="${posterUrl}" alt="${title}" />
           <div class="card-overlay"></div>
 
@@ -897,14 +137,14 @@
             <h1 class="movie-title">${title}</h1>
 
             <div class="card-meta">
-              <span class="meta-tag rating">★ ${rating}</span>
+              <span class="meta-tag rating">${rating}</span>
               <span class="meta-tag">${genres}</span>
             </div>
 
             <div class="card-footer">
               <div class="stream-info">
                 <span class="stream-label">Trending Now</span>
-                <span class="stream-date">${releaseDate}</span>
+                <span class="stream-date">Streaming Now</span>
               </div>
               <button class="watch-btn">
                 <span class="play-icon"></span>
@@ -932,8 +172,18 @@
         
         // Generate hero cards for each movie (limit to 20 as requested)
         const movies = data.results.slice(0, 20);
-        movies.forEach(movie => {
-          const cardHTML = createHeroCard(movie);
+        movies.forEach((movie, index) => {
+          // Create movie data object for TMDb movies
+          const movieObj = {
+            title: movie.title || 'Unknown Title',
+            description: movie.overview || 'No description available.',
+            rating: `★ ${movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}`,
+            genres: getGenreNames(movie.genre_ids || []),
+            backdrop: movie.backdrop_path ? BACKDROP_BASE_URL + movie.backdrop_path : '',
+            poster: movie.poster_path ? IMAGE_BASE_URL + movie.poster_path : ''
+          };
+          
+          const cardHTML = createHeroCard(`movie-${index}`, movieObj);
           scrollTrack.innerHTML += cardHTML;
         });
         
@@ -949,8 +199,42 @@
         
       } catch (error) {
         console.error('Error fetching trending movies:', error);
-        scrollTrack.innerHTML = '<p style="color: white; text-align: center; padding: 20px;">Failed to load trending movies. Please try again later.</p>';
+        // Fallback to sample data if API fails
+        loadSampleData();
       }
+    }
+
+    // ── Load Sample Data (Fallback) ─────────────────────────────
+    function loadSampleData() {
+      scrollTrack.innerHTML = '';
+      
+      // Add sample movies
+      Object.keys(movieData).forEach((key, index) => {
+        const cardHTML = createHeroCard(key, movieData[key]);
+        scrollTrack.innerHTML += cardHTML;
+      });
+      
+      addHeroCardListeners();
+      
+      // Set first movie as active
+      const firstCard = scrollTrack.querySelector('.hero-card');
+      if (firstCard) {
+        firstCard.classList.add('is-active');
+        updateMainCard(firstCard);
+      }
+    }
+
+    // ── Get Genre Names from IDs ─────────────────────────────
+    function getGenreNames(genreIds) {
+      const genreMap = {
+        28: 'Action', 12: 'Adventure', 16: 'Animation', 35: 'Comedy',
+        80: 'Crime', 99: 'Documentary', 18: 'Drama', 10751: 'Family',
+        14: 'Fantasy', 36: 'History', 27: 'Horror', 10402: 'Music',
+        9648: 'Mystery', 10749: 'Romance', 878: 'Science Fiction',
+        10770: 'TV Movie', 53: 'Thriller', 10752: 'War', 37: 'Western'
+      };
+      
+      return genreIds.slice(0, 2).map(id => genreMap[id] || 'Genre').slice(0, 2);
     }
 
     // ── Add Click Listeners to Hero Cards ───────────────────
@@ -974,24 +258,36 @@
       const backdrop = card.dataset.backdrop;
       const title = card.dataset.title;
       const desc = card.dataset.desc;
-      const meta = JSON.parse(card.dataset.meta);
+      const rating = card.dataset.rating;
+      const genres = JSON.parse(card.dataset.genres || '[]');
       
       // Update hero background with smooth transition
       if (backdrop) {
         heroBg.style.backgroundImage = `url('${backdrop}')`;
       }
       
-      // Update the cross-fade background (keeping existing functionality)
-      const bgUrl = backdrop ? `url('${backdrop}')` : card.dataset.bg;
-      clearTimeout(transitionTimer);
-      crossFadeTo(bgUrl);
-      
-      // Update card content
-      updateCard(title, desc, meta);
+      // Update card content with smooth transition
+      cardInner.classList.add('is-transitioning');
+      setTimeout(() => {
+        cardTitle.textContent = title;
+        cardDesc.textContent = desc;
+
+        // Rebuild meta badges
+        cardMeta.innerHTML = `<span class="meta-badge rating-badge">${rating}</span>`;
+        genres.forEach(genre => {
+          cardMeta.innerHTML += `<span class="meta-badge">${genre}</span>`;
+        });
+
+        cardInner.classList.remove('is-transitioning');
+      }, 200);
     }
 
     // ── Initialize on Page Load ─────────────────────────────
     document.addEventListener('DOMContentLoaded', () => {
+      // Set initial background
+      heroBg.style.backgroundImage = `url('${movieData['house-of-dragon'].backdrop}')`;
+      
+      // Try to fetch trending movies, fallback to sample data
       fetchTrendingMovies();
     });
   </script>
