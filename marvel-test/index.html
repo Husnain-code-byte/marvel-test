@@ -252,15 +252,22 @@
       const rating = card.dataset.rating;
       const genres = JSON.parse(card.dataset.genres || '[]');
       
+      console.log('Updating main card with:', { title, backdrop, rating, genres });
+      
       // Update hero background with smooth transition
       if (backdrop) {
         heroBg.style.backgroundImage = `url('${backdrop}')`;
+        console.log('Background updated to:', backdrop);
       }
       
       // Update card content with smooth transition
       cardInner.classList.add('is-transitioning');
       setTimeout(() => {
+        // Update movie title
         cardTitle.textContent = title;
+        console.log('Title updated to:', title);
+        
+        // Update description
         cardDesc.textContent = desc;
 
         // Rebuild meta badges
@@ -270,6 +277,7 @@
         });
 
         cardInner.classList.remove('is-transitioning');
+        console.log('Card content updated successfully');
       }, 200);
     }
 

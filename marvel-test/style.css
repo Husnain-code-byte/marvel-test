@@ -271,9 +271,9 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0,0,0,0.70);
-  backdrop-filter: blur(15px) saturate(120%);
-  -webkit-backdrop-filter: blur(15px) saturate(120%);
+  background: rgba(0,0,0,0.30);
+  backdrop-filter: blur(10px) saturate(100%);
+  -webkit-backdrop-filter: blur(10px) saturate(100%);
   border-top: 1px solid rgba(255,255,255,0.1);
   padding: 20px 40px 26px;
   z-index: 10;
@@ -330,8 +330,8 @@ body {
 
 .hero-card.is-active {
   transform: translateY(-10px) scale(1.02);
-  border: 2px solid #e8c86e;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px #e8c86e, 0 0 15px rgba(232, 200, 110, 0.2);
+  border: 2px solid #ffffff;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px #ffffff, 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
 .card-poster {
