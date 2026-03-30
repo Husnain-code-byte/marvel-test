@@ -31,7 +31,7 @@ body {
   background-repeat: no-repeat;
   transition: background-image 0.8s ease-in-out;
   z-index: 0;
-  filter: blur(8px) brightness(0.7);
+  background-color: #1a1a2e;
 }
 
 .hero-gradient {
@@ -102,7 +102,7 @@ body {
 .info-card {
   position: absolute;
   left: 40px;
-  top: 50%;
+  top: 35%;
   transform: translateY(-50%);
   width: 540px;
   border-radius: 20px;

@@ -138,11 +138,15 @@
     // ── Fetch Trending Movies from TMDb API ──────────────────
     async function fetchTrendingMovies() {
       try {
+        console.log('Fetching movies from TMDb API...');
         const response = await fetch(API_URL);
+        console.log('API Response:', response.status);
+        
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
+        console.log('API Data received:', data.results.length, 'movies');
         
         // Clear the scroll track before injecting new content
         scrollTrack.innerHTML = '';
@@ -150,6 +154,10 @@
         // Generate hero cards for each movie (limit to 20 as requested)
         const movies = data.results.slice(0, 20);
         movies.forEach((movie, index) => {
+          console.log(`Processing movie ${index + 1}:`, movie.title);
+          console.log('Poster path:', movie.poster_path);
+          console.log('Backdrop path:', movie.backdrop_path);
+          
           // Create movie data object for TMDb movies
           const movieObj = {
             title: movie.title || 'Unknown Title',
@@ -160,10 +168,14 @@
             poster: movie.poster_path ? IMAGE_BASE_URL + movie.poster_path : ''
           };
           
+          console.log('Generated poster URL:', movieObj.poster);
+          console.log('Generated backdrop URL:', movieObj.backdrop);
+          
           const cardHTML = createHeroCard(`movie-${index}`, movieObj);
           scrollTrack.innerHTML += cardHTML;
         });
         
+        console.log('Cards generated, adding listeners...');
         // Add click event listeners to the new hero cards
         addHeroCardListeners();
         
@@ -172,10 +184,12 @@
         if (firstCard) {
           firstCard.classList.add('is-active');
           updateMainCard(firstCard);
+          console.log('First card set as active');
         }
         
       } catch (error) {
         console.error('Error fetching trending movies:', error);
+        console.log('Falling back to sample data...');
         // Fallback to sample data if API fails
         loadSampleData();
       }
@@ -261,8 +275,11 @@
 
     // ── Initialize on Page Load ─────────────────────────────
     document.addEventListener('DOMContentLoaded', () => {
-      // Set initial background
-      heroBg.style.backgroundImage = `url('${movieData['house-of-dragon'].backdrop}')`;
+      console.log('Page loaded, initializing...');
+      
+      // Set initial background with a default image
+      heroBg.style.backgroundImage = `url('https://api.builder.io/api/v1/image/assets/TEMP/4058f056dd711db9e05d3f42f15802b3e5fb2689?width=2880')`;
+      console.log('Initial background set');
       
       // Try to fetch trending movies, fallback to sample data
       fetchTrendingMovies();
