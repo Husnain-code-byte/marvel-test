@@ -110,48 +110,25 @@
       }
     };
 
-    // ── Generate Hero Card from Movie Data ───────────────────────
+    // ── Generate Simple Poster Card from Movie Data ───────────────
     function createHeroCard(movieKey, movie) {
       const posterUrl = movie.poster || '';
       const backdropUrl = movie.backdrop || '';
       const title = movie.title || 'Unknown Title';
+      const description = movie.description || 'No description available.';
       const rating = movie.rating || 'N/A';
-      const genres = movie.genres ? movie.genres.slice(0, 2).join(' · ') : 'Drama';
+      const genres = movie.genres || [];
       
-      // Create hero card HTML using EXACT structure from movie-hero-card.html
+      // Create simple poster-only card HTML
       const cardHTML = `
         <article class="hero-card" 
                  data-movie-key="${movieKey}"
                  data-backdrop="${backdropUrl}"
                  data-title="${title}"
-                 data-desc="${movie.description || 'No description available.'}"
+                 data-desc="${description}"
                  data-rating="${rating}"
-                 data-genres='${JSON.stringify(movie.genres || [])}'>
-          <img class="card-poster" src="${posterUrl}" alt="${title}" onerror="this.src='https://via.placeholder.com/320x460/000000/ffffff?text=No+Poster'" />
-          <div class="card-overlay"></div>
-
-          <div class="network-badge">TMDB <span>TRENDING</span></div>
-
-          <div class="card-content">
-            <p class="franchise-label">Featured</p>
-            <h1 class="movie-title">${title}</h1>
-
-            <div class="card-meta">
-              <span class="meta-tag rating">${rating}</span>
-              <span class="meta-tag">${genres}</span>
-            </div>
-
-            <div class="card-footer">
-              <div class="stream-info">
-                <span class="stream-label">Trending Now</span>
-                <span class="stream-date">Streaming Now</span>
-              </div>
-              <button class="watch-btn">
-                <span class="play-icon"></span>
-                Watch Now
-              </button>
-            </div>
-          </div>
+                 data-genres='${JSON.stringify(genres)}'>
+          <img class="card-poster" src="${posterUrl}" alt="${title}" onerror="this.src='https://via.placeholder.com/400x240/000000/ffffff?text=No+Poster'" />
         </article>
       `;
       
