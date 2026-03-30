@@ -290,12 +290,13 @@ body {
 /* Horizontal Scroll Container */
 .movies-scroll-track {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   overflow-x: auto;
   padding-bottom: 4px;
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.18) transparent;
+  padding: 0 20px;
 }
 
 /* Hide scrollbar for Webkit browsers */

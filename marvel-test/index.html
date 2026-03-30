@@ -127,7 +127,7 @@
                  data-desc="${movie.description || 'No description available.'}"
                  data-rating="${rating}"
                  data-genres='${JSON.stringify(movie.genres || [])}'>
-          <img class="card-poster" src="${posterUrl}" alt="${title}" />
+          <img class="card-poster" src="${posterUrl}" alt="${title}" onerror="this.onerror='null; this.src=\"https://via.placeholder.com/320x460/000000/ffffff?text=No+Poster\"' />
           <div class="card-overlay"></div>
 
           <div class="network-badge">TMDB <span>TRENDING</span></div>
