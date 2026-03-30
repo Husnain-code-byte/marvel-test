@@ -119,6 +119,8 @@
       const rating = movie.rating || 'N/A';
       const genres = movie.genres || [];
       
+      console.log('Creating card for:', title, 'Poster URL:', posterUrl);
+      
       // Create simple poster-only card HTML
       const cardHTML = `
         <article class="hero-card" 
@@ -128,7 +130,8 @@
                  data-desc="${description}"
                  data-rating="${rating}"
                  data-genres='${JSON.stringify(genres)}'>
-          <img class="card-poster" src="${posterUrl}" alt="${title}" onerror="this.src='https://via.placeholder.com/280x168/000000/ffffff?text=No+Poster'" />
+          <img class="card-poster" src="${posterUrl}" alt="${title}" 
+               onerror="this.onerror=null; this.src='https://via.placeholder.com/280x168/333333/ffffff?text=${encodeURIComponent(title)}'" />
         </article>
       `;
       
