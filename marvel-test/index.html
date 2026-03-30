@@ -119,9 +119,7 @@
       const rating = movie.rating || 'N/A';
       const genres = movie.genres || [];
       
-      console.log('Creating card for:', title, 'Poster URL:', posterUrl);
-      
-      // Create simple poster-only card HTML with forced image load
+      // Create simple poster-only card HTML
       const cardHTML = `
         <article class="hero-card" 
                  data-movie-key="${movieKey}"
@@ -134,7 +132,7 @@
                src="${posterUrl}" 
                alt="${title}" 
                loading="eager"
-               onerror="this.onerror=null; console.log('Poster failed for:', '${title}'); this.src='https://via.placeholder.com/280x168/333333/ffffff?text=${encodeURIComponent(title)}'" />
+               onerror="this.onerror=null; this.src='https://via.placeholder.com/280x168/333333/ffffff?text=${encodeURIComponent(title)}'" />
         </article>
       `;
       
