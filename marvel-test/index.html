@@ -121,7 +121,7 @@
       
       console.log('Creating card for:', title, 'Poster URL:', posterUrl);
       
-      // Create simple poster-only card HTML
+      // Create simple poster-only card HTML with forced image load
       const cardHTML = `
         <article class="hero-card" 
                  data-movie-key="${movieKey}"
@@ -130,8 +130,11 @@
                  data-desc="${description}"
                  data-rating="${rating}"
                  data-genres='${JSON.stringify(genres)}'>
-          <img class="card-poster" src="${posterUrl}" alt="${title}" 
-               onerror="this.onerror=null; this.src='https://via.placeholder.com/280x168/333333/ffffff?text=${encodeURIComponent(title)}'" />
+          <img class="card-poster" 
+               src="${posterUrl}" 
+               alt="${title}" 
+               loading="eager"
+               onerror="this.onerror=null; console.log('Poster failed for:', '${title}'); this.src='https://via.placeholder.com/280x168/333333/ffffff?text=${encodeURIComponent(title)}'" />
         </article>
       `;
       
