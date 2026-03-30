@@ -102,9 +102,9 @@ body {
 .info-card {
   position: absolute;
   left: 40px;
-  top: 30%;
+  top: 25%;
   transform: translateY(-50%);
-  width: 400px;
+  width: 480px;
   border-radius: 16px;
   overflow: hidden;
   z-index: 10;
@@ -140,35 +140,35 @@ body {
 .card-inner {
   position: relative;
   z-index: 2;
-  padding: 24px 28px 28px;
+  padding: 20px 24px 24px;
 }
 
 .show-title {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
   color: #fff;
   line-height: 1.1;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   text-shadow: 0 2px 16px rgba(0,0,0,0.6);
   transition: opacity 0.4s ease;
   font-family: 'Inter', sans-serif;
 }
 
 .description-label {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   color: #fff;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   font-family: 'Inter', sans-serif;
 }
 
 .description-text {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
   color: rgba(255,255,255,0.72);
-  line-height: 1.5;
-  margin-bottom: 20px;
-  max-width: 320px;
+  line-height: 1.4;
+  margin-bottom: 16px;
+  max-width: 360px;
   transition: opacity 0.4s ease;
   font-family: 'Inter', sans-serif;
 }
@@ -178,7 +178,7 @@ body {
   align-items: center;
   gap: 6px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .meta-badge {
@@ -203,20 +203,20 @@ body {
 .card-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .btn-play {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: #fffefe;
   color: #000;
   border: none;
-  border-radius: 16px;
-  padding: 10px 20px;
+  border-radius: 14px;
+  padding: 8px 16px;
   font-family: 'Inter', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
@@ -230,22 +230,22 @@ body {
 }
 
 .btn-play svg {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   flex-shrink: 0;
 }
 
 .btn-watchlist {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: rgba(255,255,255,0.10);
   color: #fff;
   border: 1.5px solid rgba(255,255,255,0.55);
-  border-radius: 16px;
-  padding: 8px 16px;
+  border-radius: 14px;
+  padding: 6px 12px;
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   cursor: pointer;
   transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
@@ -260,8 +260,8 @@ body {
 }
 
 .btn-watchlist svg {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
 }
 
