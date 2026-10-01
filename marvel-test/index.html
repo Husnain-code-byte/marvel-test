@@ -75,11 +75,21 @@
     </div>
   </section>
 
+  <!--
+    Local configuration. `config.js` is gitignored and holds your TMDb API key.
+    If it is missing, the page still works — it just falls back to sample data.
+    Copy `config.example.js` to `config.js` to enable live movie data.
+  -->
+  <script src="config.js"></script>
+
   <script>
     // ── TMDb API Configuration ───────────────────────────
-    const API_KEY = '6641682e09d68d66546b74c0663edfde';
+    // The API key is intentionally NOT hardcoded here. It is read at runtime
+    // from config.js (gitignored). Copy config.example.js -> config.js.
+    const API_KEY = (window.MARVEL_APP_CONFIG && window.MARVEL_APP_CONFIG.tmdbApiKey) || '';
+    const HAS_API_KEY = Boolean(API_KEY) && API_KEY !== 'YOUR_TMDB_API_KEY_HERE';
     const API_URL = 'https://api.themoviedb.org/3/trending/movie/day?api_key=' + API_KEY;
-    const IMAGE_BASE_URL = 'https://image.tmdb.org/p/w500';
+    const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
     const BACKDROP_BASE_URL = 'https://image.tmdb.org/t/p/original';
 
     // ── DOM Elements ───────────────────────────────────────
@@ -141,6 +151,16 @@
 
     // ── Fetch Trending Movies from TMDb API ──────────────────
     async function fetchTrendingMovies() {
+      // No API key configured → skip the network call entirely and use sample data.
+      if (!HAS_API_KEY) {
+        console.info(
+          'No TMDb API key configured — showing sample data.\n' +
+          'To load live trending movies: copy config.example.js to config.js and add your key.'
+        );
+        loadSampleData();
+        return;
+      }
+
       try {
         console.log('Fetching movies from TMDb API...');
         const response = await fetch(API_URL);

@@ -1,0 +1,14 @@
+# ── Local secrets — never commit these ──────────────────────────
+# Your real TMDb API key lives in config.js, which is ignored by git.
+# Commit config.example.js instead.
+config.js
+marvel-test/config.js
+
+# ── OS / editor cruft ───────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
